@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Conservation & Management</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Styles -->
+    <style>
+        /* CSS Variables for Earthy Theme */
+        :root {
+            --primary-green: #2d6a4f;
+            --light-green: #40916c;
+            --dark-green: #1b4332;
+            --accent-green: #d8f3dc;
+            --text-dark: #1f2937;
+            --text-light: #f3f4f6;
+            --bg-color: #f8fafc;
+            --warning-red: #e63946;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Basic Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+
+        p {
+            color: #4b5563;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Reusable Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--light-green);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links li a {
+            font-weight: 500;
+            color: var(--dark-green);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(27, 67, 50, 0.7)), 
+                        url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        /* Step-by-Step Section Styles */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .step-number {
+            background: var(--primary-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark-green);
+            font-size: 1.3rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Grid Cards Generic Styles */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--accent-green);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+        }
+
+        /* Threats Section specific styling */
+        #threats {
+            background: #fff5f5;
+        }
+        
+        #threats .section-title {
+            color: var(--warning-red);
+        }
+
+        .threat-card {
+            border-top: 5px solid var(--warning-red);
+        }
+
+        .threat-card .card-icon {
+            color: var(--warning-red);
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        /* Gallery Section Updated - Masonry & Interactive Overlays */
+        #gallery {
+            background: var(--dark-green);
+            color: white;
+        }
+
+        #gallery .section-title { color: white; }
+        #gallery .section-subtitle { color: var(--accent-green); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            cursor: pointer;
+            background: #000;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
+            opacity: 0.85;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: saturate(1.2) contrast(1.1);
+            opacity: 0.7;
+        }
+
+        .gallery-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            transform: translateY(60px);
+            transition: transform 0.5s ease, background 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-content {
+            transform: translateY(0);
+        }
+
+        .gallery-tag {
+            background: var(--light-green);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .gallery-content h4 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .gallery-content p {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.2s;
+        }
+
+        .gallery-item:hover .gallery-content p {
+            opacity: 1;
+        }
+
+        .gallery-footer {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            opacity: 0;
+            transition: opacity 0.4s ease 0.3s;
+        }
+
+        .gallery-item:hover .gallery-footer {
+            opacity: 1;
+        }
+
+        /* Contact & Comments Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .contact-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 10px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .contact-info i {
+            color: var(--light-green);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .comment-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .comment-form input:focus, .comment-form textarea:focus {
+            border-color: var(--primary-green);
+        }
+
+        .btn-submit {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: var(--dark-green);
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comment-item {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-green);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .comment-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .project-team {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .project-team h4 {
+            color: var(--accent-green);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.95rem;
+            color: #d1d5db;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active { left: 0; }
+            .nav-links li a { color: var(--dark-green); display: block; padding: 10px 0;}
+            
+            .hero-content h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i> EcoForest
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#importance">Importance</a></li>
+                <li><a href="#threats">Threats</a></li>
+                <li><a href="#conservation">Conservation</a></li>
+                <li><a href="#steps">Steps</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home / Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1>Forest Conservation & Management</h1>
+            <p>Protecting the lungs of our planet. Join the movement to preserve biodiversity, combat climate change, and ensure a sustainable future for generations to come.</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section-padding" id="about">
+        <div class="container">
+            <h2 class="section-title reveal">Understanding Forests</h2>
+            <p class="section-subtitle reveal">What is Forest Conservation and Management?</p>
+            
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <h3>Preserving Nature's Balance</h3>
+                    <p><strong>Forest Conservation</strong> is the practice of planting and maintaining forested areas for the benefit and sustainability of future generations. It involves protecting ecosystems from deforestation, pollution, and destructive human activities.</p>
+                    <p><strong>Forest Management</strong> refers to the administrative, economic, legal, and social aspects of forest preservation. It includes scientific planning to ensure that timber harvesting, wildlife protection, and recreational uses are balanced sustainably.</p>
+                    <p>Together, they form the foundation of environmental stability, ensuring our planet remains habitable and vibrant.</p>
+                </div>
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lush Green Forest" class="about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance Section -->
+    <section class="section-padding" style="background: var(--accent-green);" id="importance">
+        <div class="container">
+            <h2 class="section-title reveal">Why Forests Matter</h2>
+            <p class="section-subtitle reveal">The crucial roles forests play in sustaining life on Earth</p>
+            
+            <div class="cards-grid">
+                <div class="card reveal">
+                    <i class="fas fa-frog card-icon"></i>
+                    <h3>Biodiversity 🌿</h3>
+                    <p>Forests are home to over 80% of terrestrial species of animals, plants, and insects. They provide critical habitats for countless endangered species.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-wind card-icon"></i>
+                    <h3>Oxygen Production 🌍</h3>
+                    <p>Often called the 'lungs of the Earth', forests produce massive amounts of the oxygen we breathe while purifying the air we consume.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-cloud-sun-rain card-icon"></i>
+                    <h3>Climate Regulation 🌦️</h3>
+                    <p>Trees absorb carbon dioxide, a major greenhouse gas, mitigating climate change and regulating regional rainfall and temperature.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-coins card-icon"></i>
+                    <h3>Economic Importance 💰</h3>
+                    <p>Forests provide livelihoods for over 1.6 billion people worldwide, offering timber, medicine, food, and eco-tourism opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threats Section -->
+    <section class="section-padding" id="threats">
+        <div class="container">
+            <h2 class="section-title reveal">Major Threats</h2>
+            <p class="section-subtitle reveal">The dangers our global forests face today</p>
+            
+            <div class="cards-grid">
+                <div class="card threat-card reveal">
+                    <i class="fas fa-tree-city card-icon"></i>
+                    <h3>Deforestation</h3>
+                    <p>Mass clearing of land for agriculture, urbanization, and mining destroys vital ecosystems at an alarming rate daily.</p>
+                </div>
+                <div class="card threat-card reveal">
+                    <i class="fas fa-temperature-arrow-up card-icon"></i>
+                    <h3>Climate Change</h3>
+                    <p>Changing weather patterns weaken forest health, causing droughts that make trees susceptible to pests and diseases.</p>
+                </div>
+                <div class="card threat-card reveal">
+                    <i class="fas fa-fire-flame-curved card-icon"></i>
+                    <h3>Forest Fires</h3>
+                    <p>Both natural and human-caused wildfires decimate millions of acres annually, releasing stored carbon back into the atmosphere.</p>
+                </div>
+                <div class="card threat-card reveal">
+                    <i class="fas fa-axe card-icon"></i>
+                    <h3>Illegal Logging</h3>
+                    <p>Unlawful harvesting of timber depletes valuable tree species and funds organized crime, ignoring sustainable practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conservation Section -->
+    <section class="section-padding" id="conservation">
+        <div class="container">
+            <h2 class="section-title reveal">Conservation Methods</h2>
+            <p class="section-subtitle reveal">How we can protect and restore our woodlands</p>
+            
+            <div class="cards-grid">
+                <div class="card reveal">
+                    <i class="fas fa-seedling card-icon"></i>
+                    <h3>Afforestation</h3>
+                    <p>Planting trees in barren lands to create new forests and reforesting degraded areas to restore lost ecosystems.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-gavel card-icon"></i>
+                    <h3>Government Laws</h3>
+                    <p>Implementing and strictly enforcing national and international policies that ban illegal logging and protect national parks.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-recycle card-icon"></i>
+                    <h3>Sustainable Practices</h3>
+                    <p>Using selective logging techniques and promoting eco-friendly consumer choices (like FSC-certified wood products).</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-users card-icon"></i>
+                    <h3>Community Participation</h3>
+                    <p>Empowering indigenous and local communities to manage forests, as they have generations of sustainable knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps for Conservation Section -->
+    <section class="section-padding" style="background: var(--accent-green);" id="steps">
+        <div class="container">
+            <h2 class="section-title reveal">Actionable Steps</h2>
+            <p class="section-subtitle reveal">How you can actively conserve and manage forests</p>
+            
+            <div class="steps-container">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Reduce, Reuse, Recycle Paper and Wood</h3>
+                        <p>Minimize your dependence on paper and single-use wood products. Go digital whenever possible and always recycle paper to reduce the demand for fresh timber.</p>
+                    </div>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Support Certified Sustainable Products</h3>
+                        <p>When buying wood or paper, look for certifications like FSC (Forest Stewardship Council). This ensures the products come from responsibly managed forests.</p>
+                    </div>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Participate in Reforestation Drives</h3>
+                        <p>Join local NGOs and environmental groups in tree-planting initiatives. Planting native species helps restore local ecosystems.</p>
+                    </div>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Report Illegal Activities</h3>
+                        <p>If you notice unauthorized clearing or signs of forest fire, alert the forest department immediately. Your quick action can save thousands of trees.</p>
+                    </div>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Spread Awareness</h3>
+                        <p>Educate your community about the importance of forests. Awareness leads to collective action, the most powerful tool for conservation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section-padding" id="gallery">
+        <div class="container">
+            <h2 class="section-title reveal">Ecosystem Explorer</h2>
+            <p class="section-subtitle reveal">Discover the intricate balance of different forest biomes</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sunlight in canopy">
+                    <div class="gallery-content">
+                        <span class="gallery-tag">Photosynthesis</span>
+                        <h4>The Canopy Network</h4>
+                        <p>The upper layer absorbs 90% of sunlight, fueling the entire food chain below while sequestering massive carbon.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mist in forest">
+                    <div class="gallery-content">
+                        <span class="gallery-tag">Hydrology</span>
+                        <h4>Mist & Moisture</h4>
+                        <p>High-altitude forests capture moisture directly from clouds, providing water for lowland communities.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mossy floor">
+                    <div class="gallery-content">
+                        <span class="gallery-tag">Soil Health</span>
+                        <h4>The Living Floor</h4>
+                        <p>A single teaspoon of forest soil contains billions of organisms recycling nutrients for giants to grow.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1508349937151-22b68b72d5b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Forest stream">
+                    <div class="gallery-content">
+                        <span class="gallery-tag">Riparian</span>
+                        <h4>Aquatic Arteries</h4>
+                        <p>Forest streams are vital corridors. Riparian zones filter runoff and maintain stable temperatures for aquatic life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Community Section -->
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Get Involved</h2>
+            <p class="section-subtitle reveal">Contact us or share your conservation stories</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card reveal">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Green Avenue, Eco City</p>
+                        <p><i class="fas fa-envelope"></i> contact@ecoforest.org</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) FOREST-HELP</p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                <div class="contact-card reveal">
+                    <h3>Emergency Alerts</h3>
+                    <p style="margin-bottom: 15px;">To report a forest fire or illegal logging in progress:</p>
+                    <a href="#" class="btn-submit" style="display: block; text-align: center; background: var(--warning-red);">Call Forest Emergency</a>
+                </div>
+            </div>
+
+            <!-- Comment System -->
+            <div class="comment-box reveal">
+                <h3 style="margin-bottom: 20px;">Leave a Message</h3>
+                <form class="comment-form" id="commentForm">
+                    <input type="text" id="nameInput" placeholder="Your Name" required>
+                    <textarea id="messageInput" rows="4" placeholder="Your conservation story or question..." required></textarea>
+                    <button type="submit" class="btn-submit">Post Message</button>
+                </form>
+
+                <div class="comment-list" id="commentList">
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-name">Sarah Green</span>
+                            <span>2 hours ago</span>
+                        </div>
+                        <p>I just participated in a local tree planting drive! It's so rewarding to see our community come together for the environment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <p>&copy; 2024 EcoForest Conservation. All rights reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; color: var(--accent-green);">"The best time to plant a tree was 20 years ago. The second best time is now."</p>
+
+            <!-- Project Team Section -->
+            <div class="project-team">
+                <h4>Project Team</h4>
+                <div class="team-members">
+                    <span class="team-member">Siddhi Hivarkar</span>
+                    <span class="team-member">Parth Hande</span>
+                    <span class="team-member">Rohit Ingole</span>
+                    <span class="team-member">Mrudula Jadhav</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // Simple Comment System Logic
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('nameInput').value;
+            const message = document.getElementById('messageInput').value;
+            const timeString = "Just now";
+
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-name">${name}</span>
+                    <span>${timeString}</span>
+                </div>
+                <p>${message}</p>
+            `;
+
+            commentList.prepend(commentItem);
+            commentForm.reset();
+        });
+    </script>
+</body>
+</html>
